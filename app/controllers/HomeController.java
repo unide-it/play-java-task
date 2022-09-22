@@ -1,8 +1,9 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 import models.Person;
 import models.Planet;
 import models.Universe;
@@ -48,12 +49,14 @@ public class HomeController extends Controller {
             Universe universe = new Universe();
             Planet planet = Json.fromJson(jsonPlanet, Planet.class);
             if (!planet.getResidents().isEmpty()) {
-                List<Person> people = new ArrayList<>();
-                planet.getResidents().forEach(resident -> {
-                    JsonNode jsonPerson = this.client.getPerson(resident).toCompletableFuture().join();
-                    Person person = Json.fromJson(jsonPerson, Person.class);
-                    people.add(person);
-                });
+                List<CompletableFuture<JsonNode>> completablePersonFutures = planet.getResidents().stream()
+                        .map(resident -> this.client.getPerson(resident).toCompletableFuture())
+                        .collect(Collectors.toList());
+                CompletableFuture.allOf(completablePersonFutures.toArray(new CompletableFuture[0]));
+
+                List<Person> people = completablePersonFutures.stream()
+                        .map(jsonPerson -> Json.fromJson(jsonPerson.toCompletableFuture().join(), Person.class))
+                        .collect(Collectors.toList());
                 universe.setPeople(people);
             }
             universe.setPlanet(planet);

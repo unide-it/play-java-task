@@ -151,7 +151,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "People{" +
+        return "Person{" +
                 "name='" + name + '\'' +
                 ", height='" + height + '\'' +
                 ", mass='" + mass + '\'' +
