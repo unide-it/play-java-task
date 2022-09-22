@@ -17,8 +17,10 @@ public class StartWarsClient {
         this.ws = ws;
         this.apiUrl = config.getString("api-url");
     }
+
     /**
      * get planet example
+     *
      * @return JSON Node that can be converted to Planet class
      */
     public CompletionStage<JsonNode> getFirstPlanet() {
@@ -27,4 +29,27 @@ public class StartWarsClient {
                 .thenApply(WSResponse::asJson);
     }
 
+    /**
+     * get planet by id
+     *
+     * @param id String
+     * @return JSON Node that can be converted to Planet class
+     */
+    public CompletionStage<JsonNode> getPlanetById(String id) {
+        return ws.url(apiUrl + "planets/" + id)
+                .get()
+                .thenApply(WSResponse::asJson);
+    }
+
+    /**
+     * get person
+     *
+     * @param url String
+     * @return JSON Node that can be converted to Person class
+     */
+    public CompletionStage<JsonNode> getPerson(String url) {
+        return ws.url(url)
+                .get()
+                .thenApply(WSResponse::asJson);
+    }
 }

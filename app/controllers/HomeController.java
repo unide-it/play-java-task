@@ -1,6 +1,11 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import java.util.ArrayList;
+import java.util.List;
+import models.Person;
 import models.Planet;
+import models.Universe;
 import play.libs.Json;
 import play.mvc.*;
 import services.StartWarsClient;
@@ -38,4 +43,22 @@ public class HomeController extends Controller {
         });
     }
 
+    public CompletionStage<Result> universeByPlanetId(String id) {
+        return this.client.getPlanetById(id).thenApply(jsonPlanet -> {
+            Universe universe = new Universe();
+            Planet planet = Json.fromJson(jsonPlanet, Planet.class);
+            if (!planet.getResidents().isEmpty()) {
+                List<Person> people = new ArrayList<>();
+                planet.getResidents().forEach(resident -> {
+                    JsonNode jsonPerson = this.client.getPerson(resident).toCompletableFuture().join();
+                    Person person = Json.fromJson(jsonPerson, Person.class);
+                    people.add(person);
+                });
+                universe.setPeople(people);
+            }
+            universe.setPlanet(planet);
+            return ok(universe.toString());
+        }).exceptionally(ex -> notFound(Json.toJson("Universe with planet id " + id + " not found")));
+    }
 }
+
