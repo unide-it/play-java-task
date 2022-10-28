@@ -5,8 +5,17 @@ import java.util.List;
 public class Universe {
 
     private Planet planet;
-    // TODO: add Person type and use it instead of Object here
-    private List<Object> people;
+    private List<Person> people;
+
+    public Universe(Planet planet, List<Person> people) {
+        this.planet = planet;
+        this.people = people;
+    }
+
+    public Universe() {
+        this.planet = null;
+        this.people = null;
+    }
 
     public Planet getPlanet() {
         return planet;
@@ -14,6 +23,14 @@ public class Universe {
 
     public void setPlanet(Planet planet) {
         this.planet = planet;
+    }
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Person> people) {
+        this.people = people;
     }
 
     @Override
