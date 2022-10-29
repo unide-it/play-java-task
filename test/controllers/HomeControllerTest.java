@@ -1,5 +1,6 @@
 package controllers;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import play.Application;
 import play.inject.guice.GuiceApplicationBuilder;
@@ -9,8 +10,7 @@ import play.test.WithApplication;
 
 import static org.junit.Assert.assertEquals;
 import static play.mvc.Http.Status.OK;
-import static play.test.Helpers.GET;
-import static play.test.Helpers.route;
+import static play.test.Helpers.*;
 
 public class HomeControllerTest extends WithApplication {
 
@@ -27,6 +27,9 @@ public class HomeControllerTest extends WithApplication {
 
         Result result = route(app, request);
         assertEquals(OK, result.status());
+        assertEquals("text/plain", result.contentType().get());
+        assertEquals("utf-8", result.charset().get());
+        assertEquals("Hello!", contentAsString(result));
     }
 
 }
