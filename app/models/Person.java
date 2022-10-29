@@ -1,21 +1,27 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import java.util.List;
 
 public class Person {
     private String name;
-    private String birth_year;
-    private String eye_color;
+    @JsonAlias("birth_year")
+    private String birthYear;
+    @JsonAlias("eye_color")
+    private String eyeColor;
     private String gender;
-    private String hair_color;
+    @JsonAlias("hair_color")
+    private String hairColor;
     private String height;
     private String mass;
-    private String skin_color;
+    @JsonAlias("skin_color")
+    private String skinColor;
     private String homeworld;
-    private List<Object> films;
-    private List<Object> species;
-    private List<Object> starships;
-    private List<Object> vehicles;
+    private List<String> films;
+    private List<String> species;
+    private List<String> starships;
+    private List<String> vehicles;
     private String url;
     private String created;
 
@@ -27,20 +33,20 @@ public class Person {
         this.name = name;
     }
 
-    public String getBirth_year() {
-        return birth_year;
+    public String getBirthYear() {
+        return birthYear;
     }
 
-    public void setBirth_year(String birth_year) {
-        this.birth_year = birth_year;
+    public void setBirthYear(String birthYear) {
+        this.birthYear = birthYear;
     }
 
-    public String getEye_color() {
-        return eye_color;
+    public String getEyeColor() {
+        return eyeColor;
     }
 
-    public void setEye_color(String eye_color) {
-        this.eye_color = eye_color;
+    public void setEyeColor(String eyeColor) {
+        this.eyeColor = eyeColor;
     }
 
     public String getGender() {
@@ -51,12 +57,12 @@ public class Person {
         this.gender = gender;
     }
 
-    public String getHair_color() {
-        return hair_color;
+    public String getHairColor() {
+        return hairColor;
     }
 
-    public void setHair_color(String hair_color) {
-        this.hair_color = hair_color;
+    public void setHairColor(String hairColor) {
+        this.hairColor = hairColor;
     }
 
     public String getHeight() {
@@ -75,12 +81,12 @@ public class Person {
         this.mass = mass;
     }
 
-    public String getSkin_color() {
-        return skin_color;
+    public String getSkinColor() {
+        return skinColor;
     }
 
-    public void setSkin_color(String skin_color) {
-        this.skin_color = skin_color;
+    public void setSkinColor(String skinColor) {
+        this.skinColor = skinColor;
     }
 
     public String getHomeworld() {
@@ -91,35 +97,35 @@ public class Person {
         this.homeworld = homeworld;
     }
 
-    public List<Object> getFilms() {
+    public List<String> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Object> films) {
+    public void setFilms(List<String> films) {
         this.films = films;
     }
 
-    public List<Object> getSpecies() {
+    public List<String> getSpecies() {
         return species;
     }
 
-    public void setSpecies(List<Object> species) {
+    public void setSpecies(List<String> species) {
         this.species = species;
     }
 
-    public List<Object> getStarships() {
+    public List<String> getStarships() {
         return starships;
     }
 
-    public void setStarships(List<Object> starships) {
+    public void setStarships(List<String> starships) {
         this.starships = starships;
     }
 
-    public List<Object> getVehicles() {
+    public List<String> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<Object> vehicles) {
+    public void setVehicles(List<String> vehicles) {
         this.vehicles = vehicles;
     }
 
@@ -143,13 +149,13 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "name='" + name + '\'' +
-                ", birth_year='" + birth_year + '\'' +
-                ", eye_color='" + eye_color + '\'' +
+                ", birthYear='" + birthYear + '\'' +
+                ", eyeColor='" + eyeColor + '\'' +
                 ", gender='" + gender + '\'' +
-                ", hair_color='" + hair_color + '\'' +
+                ", hairColor='" + hairColor + '\'' +
                 ", height='" + height + '\'' +
                 ", mass='" + mass + '\'' +
-                ", skin_color='" + skin_color + '\'' +
+                ", skinColor='" + skinColor + '\'' +
                 ", homeworld='" + homeworld + '\'' +
                 ", films=" + films +
                 ", species=" + species +

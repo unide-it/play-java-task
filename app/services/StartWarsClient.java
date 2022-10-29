@@ -25,10 +25,7 @@ public class StartWarsClient {
      * @return JSON Node that can be converted to Planet class
      */
     public CompletableFuture<JsonNode> getFirstPlanet() {
-        return ws.url(apiUrl + "planets/1")
-                .get()
-                .thenApply(WSResponse::asJson)
-                .toCompletableFuture();
+        return getPlanetById(1);
     }
 
     public CompletableFuture<JsonNode> getPlanetById(Integer planetId) {

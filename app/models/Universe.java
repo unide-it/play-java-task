@@ -12,26 +12,15 @@ public class Universe {
         this.people = people;
     }
 
-    public Universe() {
-        this.planet = null;
-        this.people = null;
-    }
-
     public Planet getPlanet() {
         return planet;
     }
 
-    public void setPlanet(Planet planet) {
-        this.planet = planet;
-    }
 
     public List<Person> getPeople() {
         return people;
     }
 
-    public void setPeople(List<Person> people) {
-        this.people = people;
-    }
 
     @Override
     public String toString() {

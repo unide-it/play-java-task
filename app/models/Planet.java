@@ -1,5 +1,7 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import java.util.List;
 
 public class Planet {
@@ -8,11 +10,14 @@ public class Planet {
     private String diameter;
     private String gravity;
     private String name;
-    private String orbital_period;
+    @JsonAlias("orbital_period")
+    private String orbitalPeriod;
     private String population;
     private List<String> residents;
-    private String rotation_period;
-    private String surface_water;
+    @JsonAlias("rotation_period")
+    private String rotationPeriod;
+    @JsonAlias("surface_water")
+    private String surfaceWater;
     private String terrain;
     private String url;
 
@@ -48,12 +53,12 @@ public class Planet {
         this.name = name;
     }
 
-    public String getOrbital_period() {
-        return orbital_period;
+    public String getOrbitalPeriod() {
+        return orbitalPeriod;
     }
 
-    public void setOrbital_period(String orbital_period) {
-        this.orbital_period = orbital_period;
+    public void setOrbitalPeriod(String orbitalPeriod) {
+        this.orbitalPeriod = orbitalPeriod;
     }
 
     public String getPopulation() {
@@ -72,20 +77,20 @@ public class Planet {
         this.residents = residents;
     }
 
-    public String getRotation_period() {
-        return rotation_period;
+    public String getRotationPeriod() {
+        return rotationPeriod;
     }
 
-    public void setRotation_period(String rotation_period) {
-        this.rotation_period = rotation_period;
+    public void setRotationPeriod(String rotationPeriod) {
+        this.rotationPeriod = rotationPeriod;
     }
 
-    public String getSurface_water() {
-        return surface_water;
+    public String getSurfaceWater() {
+        return surfaceWater;
     }
 
-    public void setSurface_water(String surface_water) {
-        this.surface_water = surface_water;
+    public void setSurfaceWater(String surfaceWater) {
+        this.surfaceWater = surfaceWater;
     }
 
     public String getTerrain() {
@@ -111,11 +116,11 @@ public class Planet {
                 ", diameter='" + diameter + '\'' +
                 ", gravity='" + gravity + '\'' +
                 ", name='" + name + '\'' +
-                ", orbital_period='" + orbital_period + '\'' +
+                ", orbitalPeriod='" + orbitalPeriod + '\'' +
                 ", population='" + population + '\'' +
                 ", residents=" + residents +
-                ", rotation_period='" + rotation_period + '\'' +
-                ", surface_water='" + surface_water + '\'' +
+                ", rotationPeriod='" + rotationPeriod + '\'' +
+                ", surfaceWater='" + surfaceWater + '\'' +
                 ", terrain='" + terrain + '\'' +
                 ", url='" + url + '\'' +
                 '}';
