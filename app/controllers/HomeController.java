@@ -38,4 +38,8 @@ public class HomeController extends Controller {
         });
     }
 
+    public Result planet(String id) {
+        return ok(this.client.getUniverse(id));
+    }
+
 }
