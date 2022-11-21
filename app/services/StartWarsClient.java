@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.typesafe.config.Config;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
+
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
@@ -11,9 +12,9 @@ public class StartWarsClient {
 
     private final WSClient ws;
     private final String apiUrl;
-
     @Inject
-    public StartWarsClient(WSClient ws, Config config) {
+    public StartWarsClient(WSClient ws,
+                           Config config) {
         this.ws = ws;
         this.apiUrl = config.getString("api-url");
     }
@@ -26,5 +27,4 @@ public class StartWarsClient {
                 .get()
                 .thenApply(WSResponse::asJson);
     }
-
 }
