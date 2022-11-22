@@ -1,26 +1,19 @@
 package models;
 
+import lombok.Builder;
+import lombok.Data;
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@Builder
 public class Universe {
+    @Builder.Default
+    private Planet planet = null;
+    @Builder.Default
+    private List<Person> people = new ArrayList<>();
 
-    private Planet planet;
-    // TODO: add Person type and use it instead of Object here
-    private List<Object> people;
-
-    public Planet getPlanet() {
-        return planet;
-    }
-
-    public void setPlanet(Planet planet) {
-        this.planet = planet;
-    }
-
-    @Override
-    public String toString() {
-        return "Universe{" +
-                "planet=" + planet +
-                ", people=" + people +
-                '}';
+    public void addPerson(Person person) {
+        people.add(person);
     }
 }
