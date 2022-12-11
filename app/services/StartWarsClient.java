@@ -2,19 +2,23 @@ package services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.typesafe.config.Config;
+import lombok.experimental.FieldDefaults;
 import models.Planet;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSRequest;
 import play.libs.ws.WSResponse;
+
 import javax.inject.Inject;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 
-public class StartWarsClient {
+import static lombok.AccessLevel.PRIVATE;
 
-    private final WSClient ws;
-    private final String apiUrl;
+@FieldDefaults(level = PRIVATE, makeFinal = true)
+public class StartWarsClient {
+    WSClient ws;
+    String apiUrl;
 
     @Inject
     public StartWarsClient(WSClient ws, Config config) {

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigValueFactory;
+import lombok.experimental.FieldDefaults;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,13 +21,15 @@ import services.StartWarsClient;
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
+import static lombok.AccessLevel.PRIVATE;
 import static org.junit.Assert.assertTrue;
 import static play.mvc.Results.ok;
 
+@FieldDefaults(level = PRIVATE)
 public class PlanetControllerTest {
-    private PlanetController planetController;
-    private WSClient ws;
-    private Server server;
+    PlanetController planetController;
+    WSClient ws;
+    Server server;
 
     @Before
     public void setup() {

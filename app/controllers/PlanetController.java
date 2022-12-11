@@ -1,5 +1,6 @@
 package controllers;
 
+import lombok.experimental.FieldDefaults;
 import models.Person;
 import models.Planet;
 import models.Universe;
@@ -17,9 +18,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import static java.util.stream.Collectors.toList;
+import static lombok.AccessLevel.PRIVATE;
 
+@FieldDefaults(level = PRIVATE, makeFinal = true)
 public class PlanetController extends Controller {
-    private final StartWarsClient startWarsClient;
+    StartWarsClient startWarsClient;
 
     @Inject
     public PlanetController(StartWarsClient client) {
