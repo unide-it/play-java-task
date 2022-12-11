@@ -16,6 +16,7 @@ import play.routing.RoutingDsl;
 import play.server.Server;
 import play.test.Helpers;
 import play.test.WSTestClient;
+import services.PlanetService;
 import services.StartWarsClient;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class PlanetControllerTest {
 
     @Before
     public void setup() {
-        Config config = ConfigFactory.load().withValue("api-url", ConfigValueFactory.fromAnyRef("/"));
+        Config config = ConfigFactory.load().withValue("api-url", ConfigValueFactory.fromAnyRef(""));
         server = Server.forRouter(
                 (components) ->
                         RoutingDsl.fromComponents(components)
@@ -60,7 +61,9 @@ public class PlanetControllerTest {
                                 .build()
         );
         ws = WSTestClient.newClient(server.httpPort());
-        planetController = new PlanetController(new StartWarsClient(ws, config));
+        StartWarsClient startWarsClient = new StartWarsClient(ws, config);
+        PlanetService planetService = new PlanetService(startWarsClient);
+        planetController = new PlanetController(planetService);
     }
 
     @After
