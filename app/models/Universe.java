@@ -1,26 +1,21 @@
 package models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.FieldDefaults;
+
 import java.util.List;
 
+import static lombok.AccessLevel.PRIVATE;
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@FieldDefaults(level = PRIVATE)
 public class Universe {
-
-    private Planet planet;
-    // TODO: add Person type and use it instead of Object here
-    private List<Object> people;
-
-    public Planet getPlanet() {
-        return planet;
-    }
-
-    public void setPlanet(Planet planet) {
-        this.planet = planet;
-    }
-
-    @Override
-    public String toString() {
-        return "Universe{" +
-                "planet=" + planet +
-                ", people=" + people +
-                '}';
-    }
+    Planet planet;
+    List<Person> people;
 }

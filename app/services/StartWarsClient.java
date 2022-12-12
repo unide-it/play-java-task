@@ -1,30 +1,37 @@
 package services;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.typesafe.config.Config;
+import lombok.experimental.FieldDefaults;
+import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
+
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
-public class StartWarsClient {
+import static lombok.AccessLevel.PRIVATE;
 
-    private final WSClient ws;
-    private final String apiUrl;
+@FieldDefaults(level = PRIVATE, makeFinal = true)
+public class StartWarsClient {
+    WSClient ws;
+    String apiUrl;
 
     @Inject
     public StartWarsClient(WSClient ws, Config config) {
         this.ws = ws;
         this.apiUrl = config.getString("api-url");
     }
-    /**
-     * get planet example
-     * @return JSON Node that can be converted to Planet class
-     */
-    public CompletionStage<JsonNode> getFirstPlanet() {
-        return ws.url(apiUrl + "planets/1")
-                .get()
-                .thenApply(WSResponse::asJson);
-    }
 
+    public <T> CompletionStage<T> getResource(String resourceUrl, Class<T> valueType) {
+        String fullUrl;
+        if (resourceUrl.startsWith("http")) {
+            fullUrl = resourceUrl;
+        } else {
+            fullUrl = apiUrl + resourceUrl;
+        }
+        return ws.url(fullUrl)
+                .get()
+                .thenApply(WSResponse::asJson)
+                .thenApply(json -> Json.fromJson(json, valueType));
+    }
 }
